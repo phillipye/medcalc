@@ -1,0 +1,298 @@
+<html>
+
+<head>
+
+	<title>Health Insurance Marketplace Handbook</title>
+	<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="120x120" href="res/apple-icon-120x120.png">
+    <link rel="icon" sizes="192x192" href="res/android-icon-192x192.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+        crossorigin="anonymous">
+    <link href="res/awesomplete.css" rel="stylesheet">
+    <link href="res/press.min.css" rel="stylesheet">
+    <link href="res/accordion/accordion.css" rel="stylesheet">
+    <link href="res/main.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="res/addtohomescreen.css">
+	<link rel="stylesheet" type="text/css" href="res/outdated-browser/outdated.css">
+	<script src="res/outdated-browser/outdated-browser-rework.min.js"></script>
+	<script>
+		outdatedBrowserRework({
+			browserSupport: {
+				'Chrome': 57, // Includes Chrome for mobile devices
+				'Edge': 39,
+				'Safari': 10,
+				'Mobile Safari': 10,
+				'Firefox': 50,
+				'Opera': 50,
+				// You could specify a version here if you still support IE in 2017.
+				// You could also instead seriously consider what you're doing with your time and budget
+				'IE': false
+			}
+		})
+	</script>
+    <script type="text/javascript" src="res/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="res/awesomplete.min.js"></script>
+    <script type="text/javascript" src="res/addtohomescreen.js"></script>
+    <script type="text/javascript" src="res/accordion/accordion.js"></script>
+    <script src="https://unpkg.com/tippy.js@2.5.2/dist/tippy.all.min.js"></script>
+
+    <script type="text/javascript" src="res/main.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <div style="text-align: center;">
+            <h1>Health Insurance Marketplace Handbook</h1>
+            <h4>Value-based care by the numbers.</h4>
+            <hr>
+            <div class="blurb" style="text-align: justify;">
+                When healthcare providers are caring for a patient, the costs of labs, procedures, and medications can add up. 
+                Get an idea for how much your care plan will cost to Medicare with the Health Insurance Marketplace Calculator tool.
+                Tap a cost type below to get started.
+            </div>
+            <hr>
+            <button class="accordion">
+                <h2>Outpatient Costs</h2>
+                <h4 style="font-size: 18px;">Medicare Part B</h4>    
+            </button>
+            <div class="panel" id="outpatient-panel">
+                <hr>
+                <div class="blurb" style="text-align: justify;">
+					Medicare Part B covers the cost to patients receiving emergency department services, observation services, outpatient surgery, lab tests, or X-rays, as long as they have not been admitted to the hospital as an inpatient.
+					Literature has demonstrated that some of these interventions are of low value (=quality/cost) and these will be highlighted (tap/hover for more info).
+                </div>
+                <hr>
+                <div style="height: 5px;"></div>
+                <h4>Select your locale:</h4>
+                <input class="dropdown-input" id="locale-selector" value="MANHATTAN, NY"/>
+                <button class="dropdown-btn" type="button">
+                    <i class="fas fa-caret-down"></i>
+                </button>
+                <div style="height: 10px;"></div>
+                <div class="care-list-container">
+                    <table class="care-list">
+                        <thead>
+                            <tr>
+                                <th>Intervention - <a style="color: black; text-decoration: none;" href="https://en.wikipedia.org/wiki/Healthcare_Common_Procedure_Coding_System" target="_blank">HCPCS</a></th>
+                                <th>Cost</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template class="cost-input-template">
+                                <tr class="cost-input">
+                                    <td class="cost-input-box">
+                                        <input class="dropdown-input" />
+                                        <button class="dropdown-btn" type="button">
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
+                                    </td>
+                                    <td class="cost-input-box cost-value">
+                                        <div class="low-value-tooltip"></div>
+                                        $
+                                        <span class="cost-number">--.--</span>
+                                        <br>
+                                        <i class="low-value-warning fas fa-exclamation-triangle" style="display: none;"></i>
+                                    </td>
+                                    <td>
+                                        <button class="delete-btn press press-red press-round press-ghost" type="button">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                        <tfoot>
+                            <tr class="cost-input">
+                                <td class="cost-input-box">
+                                    <button type="button" class="add-cost press press-deeppurple press-round" style="background-color: #57069cb3">
+                                        Add Intervention
+                                    </button>
+                                </td>
+                                <td class="cost-input-box cost-total">
+                                    $0.00
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+					</table>
+					              <hr>
+                    <div class="blurb">
+                        <h4>Maximum cost to the patient is:</h4>
+                        <div class="patient-costs"></div>
+                    </div>
+                    <hr>
+                    <div style="display: none">
+                        <sub>Shareable URL:</sub>
+                        <br>
+                        <input class="url-box" type="text"></input>
+                        <br><br>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <button class="accordion">
+                <h2>Inpatient Costs</h2>
+                <h4 style="font-size: 18px;">Medicare Part A</h4>    
+            </button>
+            <div class="panel" id="inpatient-panel">
+				<hr>
+				<div class="blurb" style="text-align: justify;">
+					Medicare Part A covers the cost to patients admitted to the hospital up until the day before they are discharged.
+					Treatment is lumped, with price set by the primary diagnosis necessitating admission, along with the presence of complicating conditions (CC) which can be considered major (MCC).  
+				</div>
+				<hr>
+                <div class="care-list-container">
+                    <table class="care-list">
+                        <thead>
+                            <tr>
+                                <th>Diagnosis - <a style="color: black; text-decoration: none;" href="https://en.wikipedia.org/wiki/Diagnosis-related_group" target="_blank">MS-DRG</a></th>
+                                <th>Cost</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template class="cost-input-template">
+                                <tr class="cost-input">
+                                    <td class="cost-input-box">
+                                        <input class="dropdown-input" />
+                                        <button class="dropdown-btn" type="button">
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
+                                    </td>
+                                    <td class="cost-input-box cost-value">
+                                        $
+                                        <span class="cost-number">--.--</span>
+                                    </td>
+                                    <td>
+                                        <button class="delete-btn press press-red press-round press-ghost" type="button">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                        <tfoot>
+                            <tr class="cost-input">
+                                <td class="cost-input-box">
+                                    <button type="button" class="add-cost press press-deeppurple press-round" style="background-color: #57069cb3">
+                                        Add Intervention
+                                    </button>
+                                </td>
+                                <td class="cost-input-box">
+                                    <span class="cost-total" style="display: none;">$0.00</span>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+					</table>
+					<div class="data-source">
+						<a href="https://data.cms.gov/Medicare-Inpatient/National-Summary-of-Inpatient-Charge-Data-by-Medic/efwk-h4x3" target="_blank">2015 DRG data</a> sourced from CMS.
+					</div>
+                    <hr>
+                    <div style="display: none">
+                        <sub>Shareable URL:</sub>
+                        <br>
+                        <input class="url-box" type="text"></input>
+                        <br><br>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <button class="accordion">
+                <h2>Pharmaceutical Costs</h2>
+                <h4 style="font-size: 18px;">Medicare Part D</h4>    
+            </button>
+            <div class="panel" id="pharma-panel">
+					<hr>
+					<div class="blurb" style="text-align: justify;">
+                        Medicare Part D covers the cost of self-administered medications for those who have added this additional coverage after having enrolled in Medicare Part A+B. 
+                        Costs are shown per 
+                        <tooltip data-tippy-arrow="true" title="Dosage units refer to the drug products in the form in which they are marketed for use, e.g. number of tablets, grams, milliliters or other units">
+                            <u>dosage unit</u>
+                        </tooltip>
+                        and are thus most useful for understanding the relative price-tags of various treatments. For example, comparing between drugs, or comparing generic vs brand name drugs.
+					</div>
+					<hr>                <div class="care-list-container">
+                    <table class="care-list">
+                        <thead>
+                            <tr>
+                                <th>Brand Name - <a style="color: black; text-decoration: none;" href="https://en.wikipedia.org/wiki/Diagnosis-related_group" target="_blank">Generic</a></th>
+                                <th>
+                                    <tooltip data-tippy-arrow="true" title="Dosage units refer to the drug products in the form in which they are marketed for use, e.g. number of tablets, grams, milliliters or other units">
+                                        Cost/Unit
+                                    </tooltip>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template class="cost-input-template">
+                                <tr class="cost-input">
+                                    <td class="cost-input-box">
+                                        <input class="dropdown-input" />
+                                        <button class="dropdown-btn" type="button">
+                                            <i class="fas fa-caret-down"></i>
+                                        </button>
+                                    </td>
+                                    <td class="cost-input-box cost-value">
+                                        $
+                                        <span class="cost-number">--.--</span>
+                                    </td>
+                                    <td>
+                                        <button class="delete-btn press press-red press-round press-ghost" type="button">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                        <tfoot>
+                            <tr class="cost-input">
+                                <td class="cost-input-box">
+                                    <button type="button" class="add-cost press press-deeppurple press-round" style="background-color: #57069cb3">
+                                        Add Intervention
+                                    </button>
+                                </td>
+                                <td class="cost-input-box">
+                                    <span class="cost-total" style="display: none;">$0.00</span>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+					</table>
+					<div class="data-source">
+						<a href="https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/Information-on-Prescription-Drugs/MedicarePartD.html" target="_blank">2016 avg. cost data</a> sourced from CMS.
+					</div>
+                    <div style="display: none">
+                        <sub>Shareable URL:</sub>
+                        <br>
+                        <input class="url-box" type="text"></input>
+                        <br><br>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div style="height: 5px;"></div>
+
+            
+            <br>
+            <div id="footer" style="font-size: 14px; padding: 0 10px;">
+              A Project by Phillip Ye
+                
+            <div style="height: 30px;"></div>
+        </div>
+	</div>
+	<div id="outdated"></div>
+    <script>
+        tippy('tooltip')
+	</script>
+</body>
+
+</html>
